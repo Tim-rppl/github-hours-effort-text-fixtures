@@ -1,4 +1,4 @@
-export const alpha = 1;
+export const alpha = 2;
 
 
 
