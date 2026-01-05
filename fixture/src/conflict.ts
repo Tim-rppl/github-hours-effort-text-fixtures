@@ -1,1 +1,1 @@
-export const selected = "left";
+export const selected = "manual-resolution";
