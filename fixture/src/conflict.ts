@@ -1,1 +1,1 @@
-export const selected = "base";
+export const selected = "left";
