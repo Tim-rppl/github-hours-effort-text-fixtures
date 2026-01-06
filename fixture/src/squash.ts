@@ -1,1 +1,1 @@
-export const stage = 1;
+export const stage = 2;
