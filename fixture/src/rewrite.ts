@@ -1,1 +1,1 @@
-export const rewritten = 0;
+export const rewritten = 1;
