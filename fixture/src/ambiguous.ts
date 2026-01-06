@@ -1,2 +1,2 @@
-export function oldOne(value: number): number { return value + 1; }
-export function oldTwo(value: number): number { return value + 1; }
+export function newOne(value: number): number { return value + 1; }
+export function newTwo(value: number): number { return value + 1; }
