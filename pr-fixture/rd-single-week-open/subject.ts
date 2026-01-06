@@ -1,1 +1,4 @@
-export const fixtureBaseline = true;
+export interface ActivitySignal {
+  uncertainty: number;
+  novelty: number;
+}
