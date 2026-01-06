@@ -1,1 +1,1 @@
-export const weekly = 1;
+export const weekly = 2;
