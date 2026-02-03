@@ -4,7 +4,12 @@ export interface EffortNode {
   dependencies: string[];
 }
 
-export function propagateEffort(node: EffortNode, dependencyEffort: number[], isCyclic: boolean): number {
-  const propagated = dependencyEffort.reduce((total, effort) => total + effort * 0.25, 0);
-  return node.directEffort + (isCyclic ? Math.min(propagated, node.directEffort) : propagated);
+export function propagateEffort(
+  node: EffortNode,
+  dependencyEffort: number[],
+  strategy: "bounded" | "decaying",
+): number {
+  const factor = strategy === "bounded" ? 0.25 : 0.15;
+  const propagated = dependencyEffort.reduce((total, effort) => total + effort * factor, 0);
+  return node.directEffort + Math.min(propagated, node.directEffort);
 }
