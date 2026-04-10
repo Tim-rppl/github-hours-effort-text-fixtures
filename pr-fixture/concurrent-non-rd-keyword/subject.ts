@@ -1,3 +1,3 @@
-export function researchLabel(value: string): string {
-  return value.trim();
+export function researchLabel(value: string | null): string {
+  return value?.trim() ?? "";
 }
