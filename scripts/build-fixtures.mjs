@@ -161,7 +161,7 @@ async function buildMergeResolution() {
   await startBranch('fixture/merge-resolution-base');
   await writeFixture(
     'src/merge.ts',
-    'export const alpha = 1;\nexport const beta = 1;\nexport const resolution = "automatic";\n',
+    'export const alpha = 1;\n\n\n\n\n\n\nexport const beta = 1;\nexport const resolution = "automatic";\n',
   );
   await commit('fixture: add merge resolution baseline');
   await tag('case/merge-resolution/base');
@@ -169,7 +169,7 @@ async function buildMergeResolution() {
   await runGit(['switch', '--force-create', 'fixture/merge-resolution-left']);
   await writeFixture(
     'src/merge.ts',
-    'export const alpha = 2;\nexport const beta = 1;\nexport const resolution = "automatic";\n',
+    'export const alpha = 2;\n\n\n\n\n\n\nexport const beta = 1;\nexport const resolution = "automatic";\n',
   );
   await commit('fixture: change left side');
   await tag('case/merge-resolution/left-parent');
@@ -177,7 +177,7 @@ async function buildMergeResolution() {
   await runGit(['switch', '--force-create', 'fixture/merge-resolution-right', 'case/merge-resolution/base']);
   await writeFixture(
     'src/merge.ts',
-    'export const alpha = 1;\nexport const beta = 2;\nexport const resolution = "automatic";\n',
+    'export const alpha = 1;\n\n\n\n\n\n\nexport const beta = 2;\nexport const resolution = "automatic";\n',
   );
   await commit('fixture: change right side');
   await tag('case/merge-resolution/right-parent');
@@ -186,7 +186,7 @@ async function buildMergeResolution() {
   await runGit(['merge', '--no-ff', '--no-commit', 'fixture/merge-resolution-right']);
   await writeFixture(
     'src/merge.ts',
-    'export const alpha = 2;\nexport const beta = 2;\nexport const resolution = "manual";\n',
+    'export const alpha = 2;\n\n\n\n\n\n\nexport const beta = 2;\nexport const resolution = "manual";\n',
   );
   await commit('fixture: add manual merge resolution edit');
   await tag('case/merge-resolution/result');
