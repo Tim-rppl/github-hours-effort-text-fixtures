@@ -1,0 +1,11 @@
+{
+  "name": "github-hours-effort-text-fixtures",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:fixtures": "node scripts/build-fixtures.mjs",
+    "verify": "node scripts/verify-fixtures.mjs",
+    "test": "npm run verify"
+  }
+}

@@ -1,0 +1,241 @@
+{
+  "schemaVersion": "github-hours-effort-fixtures-v1",
+  "fixtureVersion": "1.0.0",
+  "scoringTimezone": "UTC",
+  "syntheticIdentity": {
+    "name": "Fixture Developer",
+    "email": "fixture-developer@example.test"
+  },
+  "scenarios": [
+    {
+      "id": "pure-file-move",
+      "description": "An unchanged source file is renamed.",
+      "refs": {
+        "base": "case/pure-file-move/base",
+        "result": "case/pure-file-move/result"
+      },
+      "expected": {
+        "evidenceStatus": "complete",
+        "scoreRelation": "zero",
+        "reviewFlags": [],
+        "selectedLogicalChanges": 1
+      }
+    },
+    {
+      "id": "pure-function-move",
+      "description": "An unchanged function moves between two files.",
+      "refs": {
+        "base": "case/pure-function-move/base",
+        "result": "case/pure-function-move/result"
+      },
+      "expected": {
+        "evidenceStatus": "complete",
+        "scoreRelation": "zero",
+        "reviewFlags": [],
+        "selectedLogicalChanges": 1
+      }
+    },
+    {
+      "id": "move-plus-edit",
+      "description": "A function moves between files and its return expression changes.",
+      "refs": {
+        "base": "case/move-plus-edit/base",
+        "result": "case/move-plus-edit/result"
+      },
+      "expected": {
+        "evidenceStatus": "complete",
+        "scoreRelation": "positive-edit-only",
+        "reviewFlags": [],
+        "selectedLogicalChanges": 1
+      }
+    },
+    {
+      "id": "root-commit",
+      "description": "Supported source is introduced by a root commit.",
+      "refs": {
+        "result": "case/root-commit/result"
+      },
+      "expected": {
+        "parentCount": 0,
+        "evidenceStatus": "complete",
+        "scoreRelation": "positive",
+        "reviewFlags": [
+          "root-import-risk"
+        ],
+        "selectedLogicalChanges": 1
+      }
+    },
+    {
+      "id": "merge-resolution",
+      "description": "A clean automatic merge receives an additional manual resolution edit.",
+      "refs": {
+        "base": "case/merge-resolution/base",
+        "leftParent": "case/merge-resolution/left-parent",
+        "rightParent": "case/merge-resolution/right-parent",
+        "result": "case/merge-resolution/result"
+      },
+      "expected": {
+        "parentCount": 2,
+        "evidenceStatus": "complete",
+        "scoreRelation": "resolution-edit-only",
+        "reviewFlags": [],
+        "selectedLogicalChanges": 1
+      }
+    },
+    {
+      "id": "unavailable-merge-baseline",
+      "description": "A manual conflict merge is analysed without a usable automatic merge baseline.",
+      "refs": {
+        "base": "case/unavailable-merge-baseline/base",
+        "leftParent": "case/unavailable-merge-baseline/left-parent",
+        "rightParent": "case/unavailable-merge-baseline/right-parent",
+        "result": "case/unavailable-merge-baseline/result"
+      },
+      "acquisition": {
+        "mode": "shallow-result-only"
+      },
+      "expected": {
+        "parentCount": 2,
+        "evidenceStatus": "unavailable",
+        "scoreRelation": "unscored",
+        "reviewFlags": [
+          "merge-baseline-unavailable"
+        ],
+        "selectedLogicalChanges": 1
+      }
+    },
+    {
+      "id": "rewritten-equivalent",
+      "description": "Two confirmed equivalent commits produce the same final tree.",
+      "refs": {
+        "base": "case/rewritten-equivalent/base",
+        "original": "case/rewritten-equivalent/original",
+        "selected": "case/rewritten-equivalent/selected"
+      },
+      "logicalChangeGroup": "rewrite-example-1",
+      "expected": {
+        "treeRelation": "equal",
+        "scoreRelation": "selected-representation-only",
+        "reviewFlags": [],
+        "selectedLogicalChanges": 1
+      }
+    },
+    {
+      "id": "squash-preserved",
+      "description": "Two preserved source commits and one squash commit represent one logical change.",
+      "refs": {
+        "base": "case/squash-preserved/base",
+        "sourceFirst": "case/squash-preserved/source-1",
+        "sourceTip": "case/squash-preserved/source-tip",
+        "selected": "case/squash-preserved/squash-result"
+      },
+      "logicalChangeGroup": "squash-example-1",
+      "expected": {
+        "treeRelation": "equal",
+        "scoreRelation": "selected-representation-only",
+        "reviewFlags": [],
+        "selectedLogicalChanges": 1
+      }
+    },
+    {
+      "id": "rebase-equivalent",
+      "description": "An original topic commit and its rebased equivalent have different parents.",
+      "refs": {
+        "base": "case/rebase-equivalent/base",
+        "original": "case/rebase-equivalent/original",
+        "upstream": "case/rebase-equivalent/upstream",
+        "selected": "case/rebase-equivalent/rebased"
+      },
+      "logicalChangeGroup": "rebase-example-1",
+      "expected": {
+        "patchRelation": "equal",
+        "scoreRelation": "selected-representation-only",
+        "reviewFlags": [],
+        "selectedLogicalChanges": 1
+      }
+    },
+    {
+      "id": "ambiguous-unit-match",
+      "description": "Two identical functions are renamed into two equally plausible targets.",
+      "refs": {
+        "base": "case/ambiguous-unit-match/base",
+        "result": "case/ambiguous-unit-match/result"
+      },
+      "expected": {
+        "evidenceStatus": "partial",
+        "scoreRelation": "ambiguous-units-unscored",
+        "reviewFlags": [
+          "ambiguous-unit-match"
+        ],
+        "selectedLogicalChanges": 1
+      }
+    },
+    {
+      "id": "unsupported-included-source",
+      "description": "An included TypeScript file changes into invalid syntax.",
+      "refs": {
+        "base": "case/unsupported-included-source/base",
+        "result": "case/unsupported-included-source/result"
+      },
+      "expected": {
+        "evidenceStatus": "partial",
+        "scoreRelation": "must-not-silently-zero",
+        "reviewFlags": [
+          "source-analysis-failed"
+        ],
+        "selectedLogicalChanges": 1
+      }
+    },
+    {
+      "id": "no-lexical-edit",
+      "description": "Only comments and whitespace change.",
+      "refs": {
+        "base": "case/no-lexical-edit/base",
+        "result": "case/no-lexical-edit/result"
+      },
+      "expected": {
+        "evidenceStatus": "complete",
+        "scoreRelation": "zero",
+        "reviewFlags": [],
+        "selectedLogicalChanges": 1
+      }
+    },
+    {
+      "id": "small-source-change",
+      "description": "A one-line lexical edit falls below the review threshold.",
+      "refs": {
+        "base": "case/small-source-change/base",
+        "result": "case/small-source-change/result"
+      },
+      "expected": {
+        "evidenceStatus": "complete",
+        "scoreRelation": "positive",
+        "reviewFlags": [
+          "small-source-change"
+        ],
+        "selectedLogicalChanges": 1
+      }
+    },
+    {
+      "id": "incomplete-developer-week",
+      "description": "A valid source edit is scored without complete developer-week context.",
+      "refs": {
+        "base": "case/incomplete-developer-week/base",
+        "result": "case/incomplete-developer-week/result"
+      },
+      "weeklyContext": {
+        "complete": false
+      },
+      "expected": {
+        "evidenceStatus": "complete",
+        "normalisationStatus": "open",
+        "outputStatus": "provisional",
+        "scoreRelation": "positive-provisional",
+        "reviewFlags": [
+          "incomplete-developer-week"
+        ],
+        "selectedLogicalChanges": 1
+      }
+    }
+  ]
+}
