@@ -62,6 +62,12 @@ Generate the dedicated pull-request branches:
 npm run build:pr-fixtures
 ```
 
+Generate one new scenario without rewriting existing pull-request refs:
+
+```bash
+npm run build:pr-fixtures -- --scenario concurrent-rd-context
+```
+
 After the pull requests have been created and their numbers recorded in
 `pr-scenarios.json`, verify their GitHub API evidence:
 
@@ -105,6 +111,8 @@ first-to-last commit activity window, and time apportionment as one flow.
 GitHub records the real pull-request creation and merge timestamps. Those
 timestamps cannot be backdated, so historical activity windows must be derived
 from the controlled source-commit dates declared in `pr-scenarios.json`.
+Weekly check-ins in the same manifest provide controlled activity intensity;
+their activity hours plus other work always reconcile to the 35-hour week.
 
 ## Safety
 

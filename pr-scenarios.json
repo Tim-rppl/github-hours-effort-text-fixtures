@@ -1,17 +1,109 @@
 {
   "schemaVersion": "github-hours-effort-pr-fixtures-v1",
-  "fixtureVersion": "1.0.0",
+  "fixtureVersion": "1.1.0",
   "repository": "Tim-rppl/github-hours-effort-text-fixtures",
   "workSchedule": {
     "timezone": "UTC",
     "weeklyHours": 35,
     "dailyHours": 7
   },
+  "weeklyCheckIns": [
+    {
+      "identityEmail": "alex.researcher@example.test",
+      "weekStart": "2026-01-05",
+      "otherWorkHours": 21,
+      "activities": [
+        { "scenarioId": "rd-single-week-open", "hours": 14 }
+      ]
+    },
+    {
+      "identityEmail": "casey.engineer@example.test",
+      "weekStart": "2026-01-12",
+      "otherWorkHours": 27,
+      "activities": [
+        { "scenarioId": "rd-multi-week-merge", "hours": 8 }
+      ]
+    },
+    {
+      "identityEmail": "casey.engineer@example.test",
+      "weekStart": "2026-01-19",
+      "otherWorkHours": 23,
+      "activities": [
+        { "scenarioId": "rd-multi-week-merge", "hours": 12 }
+      ]
+    },
+    {
+      "identityEmail": "casey.engineer@example.test",
+      "weekStart": "2026-01-26",
+      "otherWorkHours": 21,
+      "activities": [
+        { "scenarioId": "rd-multi-week-merge", "hours": 14 }
+      ]
+    },
+    {
+      "identityEmail": "casey.engineer@example.test",
+      "weekStart": "2026-02-02",
+      "otherWorkHours": 13,
+      "activities": [
+        { "scenarioId": "rd-multi-week-merge", "hours": 22 }
+      ]
+    },
+    {
+      "identityEmail": "morgan.developer@example.test",
+      "weekStart": "2026-02-09",
+      "otherWorkHours": 21,
+      "activities": [
+        { "scenarioId": "rd-multi-week-squash", "hours": 14 }
+      ]
+    },
+    {
+      "identityEmail": "morgan.developer@example.test",
+      "weekStart": "2026-02-16",
+      "otherWorkHours": 14,
+      "activities": [
+        { "scenarioId": "rd-multi-week-squash", "hours": 21 }
+      ]
+    },
+    {
+      "identityEmail": "morgan.developer@example.test",
+      "weekStart": "2026-02-23",
+      "otherWorkHours": 14,
+      "activities": [
+        { "scenarioId": "rd-multi-week-squash", "hours": 21 }
+      ]
+    },
+    {
+      "identityEmail": "morgan.developer@example.test",
+      "weekStart": "2026-03-02",
+      "otherWorkHours": 21,
+      "activities": [
+        { "scenarioId": "rd-multi-week-squash", "hours": 14 }
+      ]
+    },
+    {
+      "identityEmail": "taylor.maintainer@example.test",
+      "weekStart": "2026-03-09",
+      "otherWorkHours": 24.5,
+      "activities": [
+        { "scenarioId": "maintenance-non-rd-rebase", "hours": 10.5 }
+      ]
+    },
+    {
+      "identityEmail": "sam.concurrent@example.test",
+      "weekStart": "2026-04-06",
+      "otherWorkHours": 0,
+      "activities": [
+        { "scenarioId": "concurrent-rd-context", "hours": 14 },
+        { "scenarioId": "concurrent-rd-prototype", "hours": 7 },
+        { "scenarioId": "concurrent-non-rd-keyword", "hours": 14 }
+      ]
+    }
+  ],
   "scenarios": [
     {
       "id": "rd-single-week-open",
       "title": "Prototype uncertainty-aware activity classifier",
-      "body": "Synthetic R&D fixture: tests a new uncertainty-aware classification approach.",
+      "body": "Technical uncertainty existed around confidence calibration. A systematic prototype compared alternative weighting methods and recorded test outcomes to establish new knowledge.",
       "baseRef": "pr-base/rd-single-week-open",
       "headRef": "pr-case/rd-single-week-open",
       "prNumber": 1,
@@ -53,7 +145,7 @@
     {
       "id": "rd-multi-week-merge",
       "title": "Explore dependency graph effort propagation",
-      "body": "Synthetic R&D fixture: explores effort propagation through a dependency graph over several weeks.",
+      "body": "Technical uncertainty existed around cyclic effort propagation. A systematic investigation compared alternative graph strategies, measured their behaviour, and produced new knowledge about bounded propagation.",
       "baseRef": "pr-base/rd-multi-week-merge",
       "headRef": "pr-case/rd-multi-week-merge",
       "prNumber": 2,
@@ -107,7 +199,7 @@
     {
       "id": "rd-multi-week-squash",
       "title": "Evaluate adaptive retrieval thresholds",
-      "body": "Synthetic R&D fixture: evaluates adaptive retrieval thresholds and is merged using squash.",
+      "body": "Technical uncertainty existed around stable adaptive thresholds. A systematic experiment evaluated alternative retrieval strategies and recorded failures before selecting an improved method.",
       "baseRef": "pr-base/rd-multi-week-squash",
       "headRef": "pr-case/rd-multi-week-squash",
       "prNumber": 3,
@@ -155,7 +247,7 @@
     {
       "id": "maintenance-non-rd-rebase",
       "title": "Fix report label formatting",
-      "body": "Synthetic non-R&D fixture: applies a known formatting correction without resolving technical uncertainty.",
+      "body": "Routine formatting correction using an established implementation approach. There was no technical uncertainty, systematic experiment, or new knowledge.",
       "baseRef": "pr-base/maintenance-non-rd-rebase",
       "headRef": "pr-case/maintenance-non-rd-rebase",
       "prNumber": 4,
@@ -191,6 +283,108 @@
           "message": "test: cover report label formatting",
           "committedAt": "2026-03-13T09:00:00.000Z",
           "knownEffortHours": 3.5
+        }
+      ]
+    },
+    {
+      "id": "concurrent-rd-context",
+      "title": "Investigate cache invalidation under uncertain event ordering",
+      "body": "Technical uncertainty existed because the correct invalidation order could not be determined in advance. A systematic investigation compared alternative event-ordering models and recorded test outcomes to establish new knowledge.",
+      "baseRef": "pr-base/concurrent-rd-context",
+      "headRef": "pr-case/concurrent-rd-context",
+      "prNumber": 5,
+      "classification": {
+        "isRd": true,
+        "reason": "PR context documents uncertainty, systematic alternatives, and new knowledge"
+      },
+      "expected": {
+        "state": "open",
+        "mergeMethod": null,
+        "baseAdvanceCommitCount": 0,
+        "sourceCommitCount": 2,
+        "firstCommitAt": "2026-04-07T09:00:00.000Z",
+        "lastCommitAt": "2026-04-08T09:00:00.000Z",
+        "activeCalendarDays": 2,
+        "knownEffortHours": 14
+      },
+      "commits": [
+        {
+          "tag": "pr-case/concurrent-rd-context/commit-1",
+          "message": "add event sequence model",
+          "committedAt": "2026-04-07T09:00:00.000Z",
+          "knownEffortHours": 7
+        },
+        {
+          "tag": "pr-case/concurrent-rd-context/commit-2",
+          "message": "record cache candidate outcomes",
+          "committedAt": "2026-04-08T09:00:00.000Z",
+          "knownEffortHours": 7
+        }
+      ]
+    },
+    {
+      "id": "concurrent-rd-prototype",
+      "title": "Prototype deterministic retry convergence",
+      "body": "Technical uncertainty existed around retry convergence. A systematic prototype tested competing backoff strategies and generated new knowledge about deterministic termination.",
+      "baseRef": "pr-base/concurrent-rd-prototype",
+      "headRef": "pr-case/concurrent-rd-prototype",
+      "prNumber": 6,
+      "classification": {
+        "isRd": true,
+        "reason": "PR context documents an uncertain problem and comparative prototype"
+      },
+      "expected": {
+        "state": "open",
+        "mergeMethod": null,
+        "baseAdvanceCommitCount": 0,
+        "sourceCommitCount": 1,
+        "firstCommitAt": "2026-04-09T09:00:00.000Z",
+        "lastCommitAt": "2026-04-09T09:00:00.000Z",
+        "activeCalendarDays": 1,
+        "knownEffortHours": 7
+      },
+      "commits": [
+        {
+          "tag": "pr-case/concurrent-rd-prototype/commit-1",
+          "message": "add bounded retry state transition",
+          "committedAt": "2026-04-09T09:00:00.000Z",
+          "knownEffortHours": 7
+        }
+      ]
+    },
+    {
+      "id": "concurrent-non-rd-keyword",
+      "title": "Research label rendering issue",
+      "body": "Routine label formatting correction using an established method. The word research is user-facing text; there was no technical uncertainty, no experiment, and no new knowledge.",
+      "baseRef": "pr-base/concurrent-non-rd-keyword",
+      "headRef": "pr-case/concurrent-non-rd-keyword",
+      "prNumber": 7,
+      "classification": {
+        "isRd": false,
+        "reason": "Routine formatting work despite an R&D-looking keyword"
+      },
+      "expected": {
+        "state": "open",
+        "mergeMethod": null,
+        "baseAdvanceCommitCount": 0,
+        "sourceCommitCount": 2,
+        "firstCommitAt": "2026-04-07T13:00:00.000Z",
+        "lastCommitAt": "2026-04-10T09:00:00.000Z",
+        "activeCalendarDays": 4,
+        "knownEffortHours": 14
+      },
+      "commits": [
+        {
+          "tag": "pr-case/concurrent-non-rd-keyword/commit-1",
+          "message": "fix research label spacing",
+          "committedAt": "2026-04-07T13:00:00.000Z",
+          "knownEffortHours": 7
+        },
+        {
+          "tag": "pr-case/concurrent-non-rd-keyword/commit-2",
+          "message": "cover empty research label",
+          "committedAt": "2026-04-10T09:00:00.000Z",
+          "knownEffortHours": 7
         }
       ]
     }

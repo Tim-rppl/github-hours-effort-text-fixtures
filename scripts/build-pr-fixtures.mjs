@@ -11,12 +11,18 @@ const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const sourceRoot = resolve(repositoryRoot, 'pr-fixture');
 const expectedRepositoryName = 'github-hours-effort-text-fixtures';
 const force = process.argv.includes('--force');
+const requestedScenarioIds = process.argv.flatMap((argument, index, argumentsList) =>
+  argument === '--scenario' ? [argumentsList[index + 1]] : [],
+).filter(Boolean);
 
 const authors = {
   'rd-single-week-open': ['Alex Researcher', 'alex.researcher@example.test'],
   'rd-multi-week-merge': ['Casey Engineer', 'casey.engineer@example.test'],
   'rd-multi-week-squash': ['Morgan Developer', 'morgan.developer@example.test'],
   'maintenance-non-rd-rebase': ['Taylor Maintainer', 'taylor.maintainer@example.test'],
+  'concurrent-rd-context': ['Sam Concurrent', 'sam.concurrent@example.test'],
+  'concurrent-rd-prototype': ['Sam Concurrent', 'sam.concurrent@example.test'],
+  'concurrent-non-rd-keyword': ['Sam Concurrent', 'sam.concurrent@example.test'],
 };
 
 const sourceSnapshots = {
@@ -155,6 +161,49 @@ export function propagateEffort(
 }
 `,
   ],
+  'concurrent-rd-context': [
+    `export interface CacheEvent {
+  key: string;
+  sequence: number;
+}
+
+export function orderEvents(events: CacheEvent[]): CacheEvent[] {
+  return [...events].sort((left, right) => left.sequence - right.sequence);
+}
+`,
+    `export interface CacheEvent {
+  key: string;
+  sequence: number;
+}
+
+export function orderEvents(events: CacheEvent[]): CacheEvent[] {
+  const latestByKey = new Map<string, CacheEvent>();
+  for (const event of events) {
+    const latest = latestByKey.get(event.key);
+    if (!latest || event.sequence > latest.sequence) latestByKey.set(event.key, event);
+  }
+  return [...latestByKey.values()].sort((left, right) => left.sequence - right.sequence);
+}
+`,
+  ],
+  'concurrent-rd-prototype': [
+    `export function boundedRetry(attempt: number, failures: number): "retry" | "stop" {
+  if (attempt >= 4) return "stop";
+  if (failures > attempt + 1) return "stop";
+  return "retry";
+}
+`,
+  ],
+  'concurrent-non-rd-keyword': [
+    `export function researchLabel(value: string): string {
+  return value.trim();
+}
+`,
+    `export function researchLabel(value: string | null): string {
+  return value?.trim() ?? "";
+}
+`,
+  ],
 };
 
 async function runGit(argumentsList, environment = {}) {
@@ -188,10 +237,12 @@ async function writeSource(scenarioId, content) {
   await writeFile(filePath, content, 'utf8');
 }
 
-async function deleteRefs(manifest) {
+async function deleteRefs(scenarios) {
   const localRefs = [];
-  for (const scenario of manifest.scenarios) {
+  const expectedTags = [];
+  for (const scenario of scenarios) {
     localRefs.push(scenario.baseRef, scenario.headRef);
+    expectedTags.push(`pr-case/${scenario.id}/base`, ...scenario.commits.map(commit => commit.tag));
   }
   const existingBranches = [];
   for (const reference of localRefs) {
@@ -202,11 +253,15 @@ async function deleteRefs(manifest) {
       // The branch has not been generated yet.
     }
   }
-  const existingTags = (await runGit([
-    'for-each-ref',
-    '--format=%(refname:short)',
-    'refs/tags/pr-case/',
-  ])).split('\n').filter(Boolean);
+  const existingTags = [];
+  for (const reference of expectedTags) {
+    try {
+      await runGit(['show-ref', '--verify', '--quiet', `refs/tags/${reference}`]);
+      existingTags.push(reference);
+    } catch {
+      // The tag has not been generated yet.
+    }
+  }
   if (existingBranches.length === 0 && existingTags.length === 0) return;
   if (!force) throw new Error('PR fixture refs already exist. Use --force for an intentional rebuild.');
   await runGit(['switch', 'main']);
@@ -250,13 +305,19 @@ async function main() {
   if (manifest.schemaVersion !== 'github-hours-effort-pr-fixtures-v1') {
     throw new Error('Unsupported pr-scenarios.json schema version');
   }
-  await deleteRefs(manifest);
-  for (const scenario of manifest.scenarios) await buildScenario(scenario);
+  const scenarios = requestedScenarioIds.length === 0
+    ? manifest.scenarios
+    : manifest.scenarios.filter(scenario => requestedScenarioIds.includes(scenario.id));
+  if (scenarios.length !== (requestedScenarioIds.length || manifest.scenarios.length)) {
+    throw new Error('One or more requested PR fixture scenarios do not exist');
+  }
+  await deleteRefs(scenarios);
+  for (const scenario of scenarios) await buildScenario(scenario);
   await runGit(['switch', 'main']);
   if (await runGit(['status', '--porcelain'])) {
     throw new Error('PR fixture generation left main dirty');
   }
-  process.stdout.write(`Generated ${manifest.scenarios.length} pull-request fixture histories.\n`);
+  process.stdout.write(`Generated ${scenarios.length} pull-request fixture histories.\n`);
 }
 
 main().catch(async error => {

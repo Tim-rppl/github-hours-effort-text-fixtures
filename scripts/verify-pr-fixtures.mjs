@@ -38,6 +38,29 @@ function normaliseTimestamp(timestamp) {
 async function main() {
   const manifest = JSON.parse(await readFile(resolve(repositoryRoot, 'pr-scenarios.json'), 'utf8'));
   assert(manifest.schemaVersion === 'github-hours-effort-pr-fixtures-v1', 'Unexpected PR manifest schema');
+  assert(Array.isArray(manifest.weeklyCheckIns), 'PR manifest must contain weekly check-ins');
+  const scenarioIds = new Set(manifest.scenarios.map(scenario => scenario.id));
+  const checkInHoursByScenario = new Map();
+  for (const checkIn of manifest.weeklyCheckIns) {
+    const activityHours = checkIn.activities.reduce((total, activity) => {
+      assert(scenarioIds.has(activity.scenarioId), `Unknown check-in scenario ${activity.scenarioId}`);
+      checkInHoursByScenario.set(
+        activity.scenarioId,
+        (checkInHoursByScenario.get(activity.scenarioId) ?? 0) + activity.hours,
+      );
+      return total + activity.hours;
+    }, 0);
+    assert(
+      activityHours + checkIn.otherWorkHours === manifest.workSchedule.weeklyHours,
+      `${checkIn.identityEmail} ${checkIn.weekStart} does not reconcile to the configured week`,
+    );
+  }
+  for (const scenario of manifest.scenarios) {
+    assert(
+      checkInHoursByScenario.get(scenario.id) === scenario.expected.knownEffortHours,
+      `${scenario.id} check-in hours do not match known effort`,
+    );
+  }
   const results = [];
 
   for (const scenario of manifest.scenarios) {
