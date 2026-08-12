@@ -105,22 +105,25 @@ async function main() {
   const root = manifest.scenarios.find(scenario => scenario.id === 'root-commit');
   assert(await getParentCount(root.refs.result) === 0, 'Root fixture unexpectedly has a parent');
 
-  const fixtureBranches = (await runGit([
+  const fixtureBranchRefs = (await runGit([
     'for-each-ref',
     '--format=%(refname:short)',
     'refs/heads/fixture/',
     'refs/remotes/origin/fixture/',
   ])).split('\n').filter(Boolean);
+  const fixtureBranches = new Set(
+    fixtureBranchRefs.map(reference => reference.replace(/^origin\//, '')),
+  );
   const caseTags = (await runGit([
     'for-each-ref',
     '--format=%(refname:short)',
     'refs/tags/case/',
   ])).split('\n').filter(Boolean);
-  assert(fixtureBranches.length >= 14, 'Expected at least one fixture branch per scenario');
+  assert(fixtureBranches.size >= 14, 'Expected at least one fixture branch per scenario');
   assert(caseTags.length >= 31, 'Expected the complete set of case tags');
 
   process.stdout.write(
-    `Verified ${manifest.scenarios.length} scenarios, ${fixtureBranches.length} branches, and ${caseTags.length} tags.\n`,
+    `Verified ${manifest.scenarios.length} scenarios, ${fixtureBranches.size} branches, and ${caseTags.length} tags.\n`,
   );
 }
 

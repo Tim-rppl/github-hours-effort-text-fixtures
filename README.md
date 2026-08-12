@@ -15,6 +15,8 @@ incomplete developer-week context.
 - `fixture/*` branches contain controlled Git histories.
 - `case/*` tags are the stable inputs consumed by external test runners.
 - `scenarios.json` records the expected treatment of each case.
+- `pr-base/*` and `pr-case/*` branches back real GitHub pull-request fixtures.
+- `pr-scenarios.json` records the known hours and expected GitHub evidence.
 - No production or proprietary source code belongs in this repository.
 
 External test runners should resolve tags rather than hard-coded commit SHAs.
@@ -54,6 +56,19 @@ Verify the manifest and Git topology:
 npm test
 ```
 
+Generate the dedicated pull-request branches:
+
+```bash
+npm run build:pr-fixtures
+```
+
+After the pull requests have been created and their numbers recorded in
+`pr-scenarios.json`, verify their GitHub API evidence:
+
+```bash
+npm run verify:github
+```
+
 The builder refuses to replace existing fixture refs unless `--force` is
 provided. Force mode is intended only for deliberate fixture-version changes.
 
@@ -72,6 +87,18 @@ An effort-analysis project should:
 Exact numeric assertions should be used only where the scoring specification
 defines the expected value independently. History-selection cases primarily
 assert zero/non-zero treatment, evidence status, and no double counting.
+
+## Pull-request fixtures
+
+The pull-request layer is separate from the commit edge-case layer. It provides
+real GitHub pull requests with controlled source commits, known author dates,
+an explicit 35-hour work week, and synthetic ground-truth effort. This allows a
+consumer to test commit acquisition, R&D classification, commit effort, the
+first-to-last commit activity window, and time apportionment as one flow.
+
+GitHub records the real pull-request creation and merge timestamps. Those
+timestamps cannot be backdated, so historical activity windows must be derived
+from the controlled source-commit dates declared in `pr-scenarios.json`.
 
 ## Safety
 

@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "github-hours-effort-pr-fixtures-v1",
+  "fixtureVersion": "1.0.0",
+  "repository": "Tim-rppl/github-hours-effort-text-fixtures",
+  "workSchedule": {
+    "timezone": "UTC",
+    "weeklyHours": 35,
+    "dailyHours": 7
+  },
+  "scenarios": [
+    {
+      "id": "rd-single-week-open",
+      "title": "Prototype uncertainty-aware activity classifier",
+      "body": "Synthetic R&D fixture: tests a new uncertainty-aware classification approach.",
+      "baseRef": "pr-base/rd-single-week-open",
+      "headRef": "pr-case/rd-single-week-open",
+      "prNumber": null,
+      "classification": {
+        "isRd": true,
+        "reason": "Experimental classification approach with technical uncertainty"
+      },
+      "expected": {
+        "state": "open",
+        "mergeMethod": null,
+        "sourceCommitCount": 3,
+        "firstCommitAt": "2026-01-06T09:00:00.000Z",
+        "lastCommitAt": "2026-01-09T09:00:00.000Z",
+        "activeCalendarDays": 4,
+        "knownEffortHours": 14
+      },
+      "commits": [
+        {
+          "tag": "pr-case/rd-single-week-open/commit-1",
+          "message": "research: define uncertain activity signals",
+          "committedAt": "2026-01-06T09:00:00.000Z",
+          "knownEffortHours": 4
+        },
+        {
+          "tag": "pr-case/rd-single-week-open/commit-2",
+          "message": "research: add confidence-weighted classification",
+          "committedAt": "2026-01-07T09:00:00.000Z",
+          "knownEffortHours": 6
+        },
+        {
+          "tag": "pr-case/rd-single-week-open/commit-3",
+          "message": "test: record uncertain classification outcomes",
+          "committedAt": "2026-01-09T09:00:00.000Z",
+          "knownEffortHours": 4
+        }
+      ]
+    },
+    {
+      "id": "rd-multi-week-merge",
+      "title": "Explore dependency graph effort propagation",
+      "body": "Synthetic R&D fixture: explores effort propagation through a dependency graph over several weeks.",
+      "baseRef": "pr-base/rd-multi-week-merge",
+      "headRef": "pr-case/rd-multi-week-merge",
+      "prNumber": null,
+      "classification": {
+        "isRd": true,
+        "reason": "Systematic investigation of an unresolved graph propagation method"
+      },
+      "expected": {
+        "state": "merged",
+        "mergeMethod": "merge",
+        "sourceCommitCount": 5,
+        "firstCommitAt": "2026-01-13T09:00:00.000Z",
+        "lastCommitAt": "2026-02-06T09:00:00.000Z",
+        "activeCalendarDays": 25,
+        "knownEffortHours": 56
+      },
+      "commits": [
+        {
+          "tag": "pr-case/rd-multi-week-merge/commit-1",
+          "message": "research: model dependency graph nodes",
+          "committedAt": "2026-01-13T09:00:00.000Z",
+          "knownEffortHours": 8
+        },
+        {
+          "tag": "pr-case/rd-multi-week-merge/commit-2",
+          "message": "research: propagate effort through graph edges",
+          "committedAt": "2026-01-20T09:00:00.000Z",
+          "knownEffortHours": 12
+        },
+        {
+          "tag": "pr-case/rd-multi-week-merge/commit-3",
+          "message": "research: handle cyclic dependency evidence",
+          "committedAt": "2026-01-27T09:00:00.000Z",
+          "knownEffortHours": 14
+        },
+        {
+          "tag": "pr-case/rd-multi-week-merge/commit-4",
+          "message": "experiment: compare propagation strategies",
+          "committedAt": "2026-02-03T09:00:00.000Z",
+          "knownEffortHours": 12
+        },
+        {
+          "tag": "pr-case/rd-multi-week-merge/commit-5",
+          "message": "test: capture graph propagation evidence",
+          "committedAt": "2026-02-06T09:00:00.000Z",
+          "knownEffortHours": 10
+        }
+      ]
+    },
+    {
+      "id": "rd-multi-week-squash",
+      "title": "Evaluate adaptive retrieval thresholds",
+      "body": "Synthetic R&D fixture: evaluates adaptive retrieval thresholds and is merged using squash.",
+      "baseRef": "pr-base/rd-multi-week-squash",
+      "headRef": "pr-case/rd-multi-week-squash",
+      "prNumber": null,
+      "classification": {
+        "isRd": true,
+        "reason": "Experimental retrieval strategy with measured alternatives"
+      },
+      "expected": {
+        "state": "merged",
+        "mergeMethod": "squash",
+        "sourceCommitCount": 4,
+        "firstCommitAt": "2026-02-10T09:00:00.000Z",
+        "lastCommitAt": "2026-03-03T09:00:00.000Z",
+        "activeCalendarDays": 22,
+        "knownEffortHours": 70
+      },
+      "commits": [
+        {
+          "tag": "pr-case/rd-multi-week-squash/commit-1",
+          "message": "research: establish retrieval threshold baseline",
+          "committedAt": "2026-02-10T09:00:00.000Z",
+          "knownEffortHours": 14
+        },
+        {
+          "tag": "pr-case/rd-multi-week-squash/commit-2",
+          "message": "experiment: adapt thresholds to signal density",
+          "committedAt": "2026-02-17T09:00:00.000Z",
+          "knownEffortHours": 21
+        },
+        {
+          "tag": "pr-case/rd-multi-week-squash/commit-3",
+          "message": "experiment: reject unstable threshold changes",
+          "committedAt": "2026-02-24T09:00:00.000Z",
+          "knownEffortHours": 21
+        },
+        {
+          "tag": "pr-case/rd-multi-week-squash/commit-4",
+          "message": "test: document adaptive retrieval results",
+          "committedAt": "2026-03-03T09:00:00.000Z",
+          "knownEffortHours": 14
+        }
+      ]
+    },
+    {
+      "id": "maintenance-non-rd-rebase",
+      "title": "Fix report label formatting",
+      "body": "Synthetic non-R&D fixture: applies a known formatting correction without resolving technical uncertainty.",
+      "baseRef": "pr-base/maintenance-non-rd-rebase",
+      "headRef": "pr-case/maintenance-non-rd-rebase",
+      "prNumber": null,
+      "classification": {
+        "isRd": false,
+        "reason": "Routine correction using an established implementation approach"
+      },
+      "expected": {
+        "state": "merged",
+        "mergeMethod": "rebase",
+        "sourceCommitCount": 3,
+        "firstCommitAt": "2026-03-10T09:00:00.000Z",
+        "lastCommitAt": "2026-03-13T09:00:00.000Z",
+        "activeCalendarDays": 4,
+        "knownEffortHours": 10.5
+      },
+      "commits": [
+        {
+          "tag": "pr-case/maintenance-non-rd-rebase/commit-1",
+          "message": "fix: normalise report label spacing",
+          "committedAt": "2026-03-10T09:00:00.000Z",
+          "knownEffortHours": 3.5
+        },
+        {
+          "tag": "pr-case/maintenance-non-rd-rebase/commit-2",
+          "message": "fix: preserve empty report labels",
+          "committedAt": "2026-03-11T09:00:00.000Z",
+          "knownEffortHours": 3.5
+        },
+        {
+          "tag": "pr-case/maintenance-non-rd-rebase/commit-3",
+          "message": "test: cover report label formatting",
+          "committedAt": "2026-03-13T09:00:00.000Z",
+          "knownEffortHours": 3.5
+        }
+      ]
+    }
+  ]
+}
