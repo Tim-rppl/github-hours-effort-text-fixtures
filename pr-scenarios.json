@@ -14,7 +14,7 @@
       "body": "Synthetic R&D fixture: tests a new uncertainty-aware classification approach.",
       "baseRef": "pr-base/rd-single-week-open",
       "headRef": "pr-case/rd-single-week-open",
-      "prNumber": null,
+      "prNumber": 1,
       "classification": {
         "isRd": true,
         "reason": "Experimental classification approach with technical uncertainty"
@@ -22,6 +22,7 @@
       "expected": {
         "state": "open",
         "mergeMethod": null,
+        "baseAdvanceCommitCount": 0,
         "sourceCommitCount": 3,
         "firstCommitAt": "2026-01-06T09:00:00.000Z",
         "lastCommitAt": "2026-01-09T09:00:00.000Z",
@@ -55,7 +56,7 @@
       "body": "Synthetic R&D fixture: explores effort propagation through a dependency graph over several weeks.",
       "baseRef": "pr-base/rd-multi-week-merge",
       "headRef": "pr-case/rd-multi-week-merge",
-      "prNumber": null,
+      "prNumber": 2,
       "classification": {
         "isRd": true,
         "reason": "Systematic investigation of an unresolved graph propagation method"
@@ -63,6 +64,7 @@
       "expected": {
         "state": "merged",
         "mergeMethod": "merge",
+        "baseAdvanceCommitCount": 6,
         "sourceCommitCount": 5,
         "firstCommitAt": "2026-01-13T09:00:00.000Z",
         "lastCommitAt": "2026-02-06T09:00:00.000Z",
@@ -108,7 +110,7 @@
       "body": "Synthetic R&D fixture: evaluates adaptive retrieval thresholds and is merged using squash.",
       "baseRef": "pr-base/rd-multi-week-squash",
       "headRef": "pr-case/rd-multi-week-squash",
-      "prNumber": null,
+      "prNumber": 3,
       "classification": {
         "isRd": true,
         "reason": "Experimental retrieval strategy with measured alternatives"
@@ -116,6 +118,7 @@
       "expected": {
         "state": "merged",
         "mergeMethod": "squash",
+        "baseAdvanceCommitCount": 1,
         "sourceCommitCount": 4,
         "firstCommitAt": "2026-02-10T09:00:00.000Z",
         "lastCommitAt": "2026-03-03T09:00:00.000Z",
@@ -155,7 +158,7 @@
       "body": "Synthetic non-R&D fixture: applies a known formatting correction without resolving technical uncertainty.",
       "baseRef": "pr-base/maintenance-non-rd-rebase",
       "headRef": "pr-case/maintenance-non-rd-rebase",
-      "prNumber": null,
+      "prNumber": 4,
       "classification": {
         "isRd": false,
         "reason": "Routine correction using an established implementation approach"
@@ -163,6 +166,7 @@
       "expected": {
         "state": "merged",
         "mergeMethod": "rebase",
+        "baseAdvanceCommitCount": 3,
         "sourceCommitCount": 3,
         "firstCommitAt": "2026-03-10T09:00:00.000Z",
         "lastCommitAt": "2026-03-13T09:00:00.000Z",

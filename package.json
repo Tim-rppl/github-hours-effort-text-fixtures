@@ -8,6 +8,7 @@
     "build:pr-fixtures": "node scripts/build-pr-fixtures.mjs",
     "verify": "node scripts/verify-fixtures.mjs",
     "verify:github": "node scripts/verify-pr-fixtures.mjs",
+    "verify:github:report": "node scripts/verify-pr-fixtures.mjs --output reports/pr-fixture-verification.json",
     "test": "npm run verify"
   }
 }

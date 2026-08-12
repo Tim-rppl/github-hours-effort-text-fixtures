@@ -1,0 +1,72 @@
+{
+  "repository": "Tim-rppl/github-hours-effort-text-fixtures",
+  "verifiedPullRequests": 4,
+  "knownRdHours": 140,
+  "knownNonRdHours": 10.5,
+  "results": [
+    {
+      "id": "rd-single-week-open",
+      "prNumber": 1,
+      "state": "open",
+      "mergeMethod": null,
+      "baseAdvanceCommitCount": 0,
+      "sourceCommitCount": 3,
+      "firstCommitAt": "2026-01-06T09:00:00.000Z",
+      "lastCommitAt": "2026-01-09T09:00:00.000Z",
+      "activeCalendarDays": 4,
+      "changedFileCount": 1,
+      "hasDiffPatches": true,
+      "isRdGroundTruth": true,
+      "knownEffortHours": 14,
+      "url": "https://github.com/Tim-rppl/github-hours-effort-text-fixtures/pull/1"
+    },
+    {
+      "id": "rd-multi-week-merge",
+      "prNumber": 2,
+      "state": "merged",
+      "mergeMethod": "merge",
+      "baseAdvanceCommitCount": 6,
+      "sourceCommitCount": 5,
+      "firstCommitAt": "2026-01-13T09:00:00.000Z",
+      "lastCommitAt": "2026-02-06T09:00:00.000Z",
+      "activeCalendarDays": 25,
+      "changedFileCount": 1,
+      "hasDiffPatches": true,
+      "isRdGroundTruth": true,
+      "knownEffortHours": 56,
+      "url": "https://github.com/Tim-rppl/github-hours-effort-text-fixtures/pull/2"
+    },
+    {
+      "id": "rd-multi-week-squash",
+      "prNumber": 3,
+      "state": "merged",
+      "mergeMethod": "squash",
+      "baseAdvanceCommitCount": 1,
+      "sourceCommitCount": 4,
+      "firstCommitAt": "2026-02-10T09:00:00.000Z",
+      "lastCommitAt": "2026-03-03T09:00:00.000Z",
+      "activeCalendarDays": 22,
+      "changedFileCount": 1,
+      "hasDiffPatches": true,
+      "isRdGroundTruth": true,
+      "knownEffortHours": 70,
+      "url": "https://github.com/Tim-rppl/github-hours-effort-text-fixtures/pull/3"
+    },
+    {
+      "id": "maintenance-non-rd-rebase",
+      "prNumber": 4,
+      "state": "merged",
+      "mergeMethod": "rebase",
+      "baseAdvanceCommitCount": 3,
+      "sourceCommitCount": 3,
+      "firstCommitAt": "2026-03-10T09:00:00.000Z",
+      "lastCommitAt": "2026-03-13T09:00:00.000Z",
+      "activeCalendarDays": 4,
+      "changedFileCount": 1,
+      "hasDiffPatches": true,
+      "isRdGroundTruth": false,
+      "knownEffortHours": 10.5,
+      "url": "https://github.com/Tim-rppl/github-hours-effort-text-fixtures/pull/4"
+    }
+  ]
+}

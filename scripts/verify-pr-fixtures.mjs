@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { execFile } from 'node:child_process';
-import { readFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
@@ -9,6 +9,8 @@ import { promisify } from 'node:util';
 const execFileAsync = promisify(execFile);
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const millisecondsPerDay = 24 * 60 * 60 * 1000;
+const outputArgumentIndex = process.argv.indexOf('--output');
+const outputPath = outputArgumentIndex >= 0 ? process.argv[outputArgumentIndex + 1] : undefined;
 
 async function runGh(argumentsList) {
   const result = await execFileAsync('gh', argumentsList, {
@@ -24,6 +26,13 @@ function assert(condition, message) {
 
 function calculateActiveCalendarDays(firstCommitAt, lastCommitAt) {
   return Math.floor((Date.parse(lastCommitAt) - Date.parse(firstCommitAt)) / millisecondsPerDay) + 1;
+}
+
+function normaliseTimestamp(timestamp) {
+  if (typeof timestamp !== 'string' || Number.isNaN(Date.parse(timestamp))) {
+    throw new Error('GitHub returned an invalid commit timestamp');
+  }
+  return new Date(timestamp).toISOString();
 }
 
 async function main() {
@@ -45,10 +54,14 @@ async function main() {
       'api',
       `repos/${manifest.repository}/pulls/${scenario.prNumber}/files?per_page=100`,
     ]));
+    const comparison = JSON.parse(await runGh([
+      'api',
+      `repos/${manifest.repository}/compare/pr-case%2F${scenario.id}%2Fbase...${scenario.baseRef.replaceAll('/', '%2F')}`,
+    ]));
 
     const observedState = pullRequest.merged_at ? 'merged' : pullRequest.state;
-    const firstCommitAt = commits[0]?.commit?.author?.date;
-    const lastCommitAt = commits.at(-1)?.commit?.author?.date;
+    const firstCommitAt = normaliseTimestamp(commits[0]?.commit?.author?.date);
+    const lastCommitAt = normaliseTimestamp(commits.at(-1)?.commit?.author?.date);
     assert(pullRequest.base.ref === scenario.baseRef, `${scenario.id} has the wrong base branch`);
     assert(pullRequest.head.ref === scenario.headRef, `${scenario.id} has the wrong head branch`);
     assert(observedState === scenario.expected.state, `${scenario.id} has unexpected state ${observedState}`);
@@ -62,12 +75,18 @@ async function main() {
       calculateActiveCalendarDays(firstCommitAt, lastCommitAt) === scenario.expected.activeCalendarDays,
       `${scenario.id} has the wrong active window`,
     );
+    assert(
+      comparison.ahead_by === scenario.expected.baseAdvanceCommitCount,
+      `${scenario.id} base advanced by ${comparison.ahead_by} commits instead of ${scenario.expected.baseAdvanceCommitCount}`,
+    );
     assert(files.length > 0 && files.every(file => typeof file.patch === 'string'), `${scenario.id} lacks diff patches`);
 
     results.push({
       id: scenario.id,
       prNumber: scenario.prNumber,
       state: observedState,
+      mergeMethod: scenario.expected.mergeMethod,
+      baseAdvanceCommitCount: comparison.ahead_by,
       sourceCommitCount: commits.length,
       firstCommitAt,
       lastCommitAt,
@@ -86,13 +105,21 @@ async function main() {
   const knownNonRdHours = results
     .filter(result => !result.isRdGroundTruth)
     .reduce((total, result) => total + result.knownEffortHours, 0);
-  process.stdout.write(`${JSON.stringify({
+  const report = {
     repository: manifest.repository,
     verifiedPullRequests: results.length,
     knownRdHours,
     knownNonRdHours,
     results,
-  }, null, 2)}\n`);
+  };
+  const serialisedReport = `${JSON.stringify(report, null, 2)}\n`;
+  if (outputArgumentIndex >= 0) {
+    assert(typeof outputPath === 'string' && outputPath.length > 0, '--output requires a file path');
+    const absoluteOutputPath = resolve(repositoryRoot, outputPath);
+    await mkdir(dirname(absoluteOutputPath), { recursive: true });
+    await writeFile(absoluteOutputPath, serialisedReport, 'utf8');
+  }
+  process.stdout.write(serialisedReport);
 }
 
 main().catch(error => {

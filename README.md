@@ -69,6 +69,12 @@ After the pull requests have been created and their numbers recorded in
 npm run verify:github
 ```
 
+Save the verified API evidence as a JSON baseline report:
+
+```bash
+npm run verify:github:report
+```
+
 The builder refuses to replace existing fixture refs unless `--force` is
 provided. Force mode is intended only for deliberate fixture-version changes.
 
