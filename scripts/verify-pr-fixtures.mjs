@@ -25,7 +25,11 @@ function assert(condition, message) {
 }
 
 function calculateActiveCalendarDays(firstCommitAt, lastCommitAt) {
-  return Math.floor((Date.parse(lastCommitAt) - Date.parse(firstCommitAt)) / millisecondsPerDay) + 1;
+  const firstDate = new Date(firstCommitAt);
+  const lastDate = new Date(lastCommitAt);
+  const firstDay = Date.UTC(firstDate.getUTCFullYear(), firstDate.getUTCMonth(), firstDate.getUTCDate());
+  const lastDay = Date.UTC(lastDate.getUTCFullYear(), lastDate.getUTCMonth(), lastDate.getUTCDate());
+  return Math.floor((lastDay - firstDay) / millisecondsPerDay) + 1;
 }
 
 function normaliseTimestamp(timestamp) {

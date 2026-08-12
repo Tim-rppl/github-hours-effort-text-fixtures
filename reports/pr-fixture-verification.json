@@ -1,8 +1,8 @@
 {
   "repository": "Tim-rppl/github-hours-effort-text-fixtures",
-  "verifiedPullRequests": 4,
-  "knownRdHours": 140,
-  "knownNonRdHours": 10.5,
+  "verifiedPullRequests": 7,
+  "knownRdHours": 161,
+  "knownNonRdHours": 24.5,
   "results": [
     {
       "id": "rd-single-week-open",
@@ -67,6 +67,54 @@
       "isRdGroundTruth": false,
       "knownEffortHours": 10.5,
       "url": "https://github.com/Tim-rppl/github-hours-effort-text-fixtures/pull/4"
+    },
+    {
+      "id": "concurrent-rd-context",
+      "prNumber": 5,
+      "state": "open",
+      "mergeMethod": null,
+      "baseAdvanceCommitCount": 0,
+      "sourceCommitCount": 2,
+      "firstCommitAt": "2026-04-07T09:00:00.000Z",
+      "lastCommitAt": "2026-04-08T09:00:00.000Z",
+      "activeCalendarDays": 2,
+      "changedFileCount": 1,
+      "hasDiffPatches": true,
+      "isRdGroundTruth": true,
+      "knownEffortHours": 14,
+      "url": "https://github.com/Tim-rppl/github-hours-effort-text-fixtures/pull/5"
+    },
+    {
+      "id": "concurrent-rd-prototype",
+      "prNumber": 6,
+      "state": "open",
+      "mergeMethod": null,
+      "baseAdvanceCommitCount": 0,
+      "sourceCommitCount": 1,
+      "firstCommitAt": "2026-04-09T09:00:00.000Z",
+      "lastCommitAt": "2026-04-09T09:00:00.000Z",
+      "activeCalendarDays": 1,
+      "changedFileCount": 1,
+      "hasDiffPatches": true,
+      "isRdGroundTruth": true,
+      "knownEffortHours": 7,
+      "url": "https://github.com/Tim-rppl/github-hours-effort-text-fixtures/pull/6"
+    },
+    {
+      "id": "concurrent-non-rd-keyword",
+      "prNumber": 7,
+      "state": "open",
+      "mergeMethod": null,
+      "baseAdvanceCommitCount": 0,
+      "sourceCommitCount": 2,
+      "firstCommitAt": "2026-04-07T13:00:00.000Z",
+      "lastCommitAt": "2026-04-10T09:00:00.000Z",
+      "activeCalendarDays": 4,
+      "changedFileCount": 1,
+      "hasDiffPatches": true,
+      "isRdGroundTruth": false,
+      "knownEffortHours": 14,
+      "url": "https://github.com/Tim-rppl/github-hours-effort-text-fixtures/pull/7"
     }
   ]
 }
