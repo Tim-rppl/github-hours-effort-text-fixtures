@@ -1,6 +1,6 @@
 {
   "schemaVersion": "github-hours-effort-fixtures-v1",
-  "fixtureVersion": "1.0.0",
+  "fixtureVersion": "1.1.0",
   "scoringTimezone": "UTC",
   "syntheticIdentity": {
     "name": "Fixture Developer",
@@ -178,7 +178,7 @@
         "result": "case/unsupported-included-source/result"
       },
       "expected": {
-        "evidenceStatus": "partial",
+        "evidenceStatus": "unavailable",
         "scoreRelation": "must-not-silently-zero",
         "reviewFlags": [
           "source-analysis-failed"
