@@ -1,7 +1,7 @@
 {
   "repository": "Tim-rppl/github-hours-effort-text-fixtures",
-  "verifiedPullRequests": 7,
-  "knownRdHours": 161,
+  "verifiedPullRequests": 8,
+  "knownRdHours": 203,
   "knownNonRdHours": 24.5,
   "results": [
     {
@@ -14,6 +14,7 @@
       "firstCommitAt": "2026-01-06T09:00:00.000Z",
       "lastCommitAt": "2026-01-09T09:00:00.000Z",
       "activeCalendarDays": 4,
+      "externalStartEvidence": null,
       "changedFileCount": 1,
       "hasDiffPatches": true,
       "isRdGroundTruth": true,
@@ -30,6 +31,7 @@
       "firstCommitAt": "2026-01-13T09:00:00.000Z",
       "lastCommitAt": "2026-02-06T09:00:00.000Z",
       "activeCalendarDays": 25,
+      "externalStartEvidence": null,
       "changedFileCount": 1,
       "hasDiffPatches": true,
       "isRdGroundTruth": true,
@@ -46,6 +48,7 @@
       "firstCommitAt": "2026-02-10T09:00:00.000Z",
       "lastCommitAt": "2026-03-03T09:00:00.000Z",
       "activeCalendarDays": 22,
+      "externalStartEvidence": null,
       "changedFileCount": 1,
       "hasDiffPatches": true,
       "isRdGroundTruth": true,
@@ -62,6 +65,7 @@
       "firstCommitAt": "2026-03-10T09:00:00.000Z",
       "lastCommitAt": "2026-03-13T09:00:00.000Z",
       "activeCalendarDays": 4,
+      "externalStartEvidence": null,
       "changedFileCount": 1,
       "hasDiffPatches": true,
       "isRdGroundTruth": false,
@@ -78,6 +82,7 @@
       "firstCommitAt": "2026-04-07T09:00:00.000Z",
       "lastCommitAt": "2026-04-08T09:00:00.000Z",
       "activeCalendarDays": 2,
+      "externalStartEvidence": null,
       "changedFileCount": 1,
       "hasDiffPatches": true,
       "isRdGroundTruth": true,
@@ -94,6 +99,7 @@
       "firstCommitAt": "2026-04-09T09:00:00.000Z",
       "lastCommitAt": "2026-04-09T09:00:00.000Z",
       "activeCalendarDays": 1,
+      "externalStartEvidence": null,
       "changedFileCount": 1,
       "hasDiffPatches": true,
       "isRdGroundTruth": true,
@@ -110,11 +116,34 @@
       "firstCommitAt": "2026-04-07T13:00:00.000Z",
       "lastCommitAt": "2026-04-10T09:00:00.000Z",
       "activeCalendarDays": 4,
+      "externalStartEvidence": null,
       "changedFileCount": 1,
       "hasDiffPatches": true,
       "isRdGroundTruth": false,
       "knownEffortHours": 14,
       "url": "https://github.com/Tim-rppl/github-hours-effort-text-fixtures/pull/7"
+    },
+    {
+      "id": "rd-external-start-multi-week",
+      "prNumber": 8,
+      "state": "open",
+      "mergeMethod": null,
+      "baseAdvanceCommitCount": 0,
+      "sourceCommitCount": 3,
+      "firstCommitAt": "2026-05-05T09:00:00.000Z",
+      "lastCommitAt": "2026-05-15T09:00:00.000Z",
+      "activeCalendarDays": 11,
+      "externalStartEvidence": {
+        "identityEmail": "jamie.investigator@example.test",
+        "startedAt": "2026-04-20T09:00:00.000Z",
+        "sourceType": "manual-task-record",
+        "sourceReference": "fixture-task-8"
+      },
+      "changedFileCount": 1,
+      "hasDiffPatches": true,
+      "isRdGroundTruth": true,
+      "knownEffortHours": 42,
+      "url": "https://github.com/Tim-rppl/github-hours-effort-text-fixtures/pull/8"
     }
   ]
 }
