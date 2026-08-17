@@ -60,6 +60,22 @@ async function main() {
     );
   }
   for (const scenario of manifest.scenarios) {
+    if (scenario.externalStartEvidence) {
+      assert(
+        typeof scenario.externalStartEvidence.identityEmail === 'string' &&
+          scenario.externalStartEvidence.identityEmail.length > 0,
+        `${scenario.id} external start evidence lacks an identity`,
+      );
+      assert(
+        typeof scenario.externalStartEvidence.sourceReference === 'string' &&
+          scenario.externalStartEvidence.sourceReference.length > 0,
+        `${scenario.id} external start evidence lacks a source reference`,
+      );
+      assert(
+        Date.parse(scenario.externalStartEvidence.startedAt) <= Date.parse(scenario.expected.firstCommitAt),
+        `${scenario.id} external start occurs after the first commit`,
+      );
+    }
     assert(
       checkInHoursByScenario.get(scenario.id) === scenario.expected.knownEffortHours,
       `${scenario.id} check-in hours do not match known effort`,
@@ -118,6 +134,7 @@ async function main() {
       firstCommitAt,
       lastCommitAt,
       activeCalendarDays: calculateActiveCalendarDays(firstCommitAt, lastCommitAt),
+      externalStartEvidence: scenario.externalStartEvidence ?? null,
       changedFileCount: files.length,
       hasDiffPatches: files.every(file => typeof file.patch === 'string'),
       isRdGroundTruth: scenario.classification.isRd,

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "github-hours-effort-pr-fixtures-v1",
-  "fixtureVersion": "1.1.0",
+  "fixtureVersion": "1.2.0",
   "repository": "Tim-rppl/github-hours-effort-text-fixtures",
   "workSchedule": {
     "timezone": "UTC",
@@ -96,6 +96,38 @@
         { "scenarioId": "concurrent-rd-context", "hours": 14 },
         { "scenarioId": "concurrent-rd-prototype", "hours": 7 },
         { "scenarioId": "concurrent-non-rd-keyword", "hours": 14 }
+      ]
+    },
+    {
+      "identityEmail": "jamie.investigator@example.test",
+      "weekStart": "2026-04-20",
+      "otherWorkHours": 28,
+      "activities": [
+        { "scenarioId": "rd-external-start-multi-week", "hours": 7 }
+      ]
+    },
+    {
+      "identityEmail": "jamie.investigator@example.test",
+      "weekStart": "2026-04-27",
+      "otherWorkHours": 21,
+      "activities": [
+        { "scenarioId": "rd-external-start-multi-week", "hours": 14 }
+      ]
+    },
+    {
+      "identityEmail": "jamie.investigator@example.test",
+      "weekStart": "2026-05-04",
+      "otherWorkHours": 21,
+      "activities": [
+        { "scenarioId": "rd-external-start-multi-week", "hours": 14 }
+      ]
+    },
+    {
+      "identityEmail": "jamie.investigator@example.test",
+      "weekStart": "2026-05-11",
+      "otherWorkHours": 28,
+      "activities": [
+        { "scenarioId": "rd-external-start-multi-week", "hours": 7 }
       ]
     }
   ],
@@ -384,6 +416,57 @@
           "tag": "pr-case/concurrent-non-rd-keyword/commit-2",
           "message": "cover empty research label",
           "committedAt": "2026-04-10T09:00:00.000Z",
+          "knownEffortHours": 7
+        }
+      ]
+    },
+    {
+      "id": "rd-external-start-multi-week",
+      "title": "Investigate sparse evidence sequence recovery",
+      "body": "Technical uncertainty existed around reconstructing ordered evidence from incomplete event sequences. A systematic investigation compared recovery strategies and recorded failure cases before selecting a bounded approach.",
+      "baseRef": "pr-base/rd-external-start-multi-week",
+      "headRef": "pr-case/rd-external-start-multi-week",
+      "prNumber": 8,
+      "classification": {
+        "isRd": true,
+        "reason": "Systematic investigation of an uncertain sparse evidence recovery method"
+      },
+      "externalStartEvidence": {
+        "identityEmail": "jamie.investigator@example.test",
+        "startedAt": "2026-04-20T09:00:00.000Z",
+        "sourceType": "manual-task-record",
+        "sourceReference": "fixture-task-8"
+      },
+      "expected": {
+        "state": "open",
+        "mergeMethod": null,
+        "baseAdvanceCommitCount": 0,
+        "sourceCommitCount": 3,
+        "firstCommitAt": "2026-05-05T09:00:00.000Z",
+        "lastCommitAt": "2026-05-15T09:00:00.000Z",
+        "activeCalendarDays": 11,
+        "githubActiveWeeks": 2,
+        "evidenceActiveWeeks": 4,
+        "knownPreCommitHours": 21,
+        "knownEffortHours": 42
+      },
+      "commits": [
+        {
+          "tag": "pr-case/rd-external-start-multi-week/commit-1",
+          "message": "research: model sparse evidence sequences",
+          "committedAt": "2026-05-05T09:00:00.000Z",
+          "knownEffortHours": 7
+        },
+        {
+          "tag": "pr-case/rd-external-start-multi-week/commit-2",
+          "message": "experiment: compare bounded recovery strategies",
+          "committedAt": "2026-05-08T09:00:00.000Z",
+          "knownEffortHours": 7
+        },
+        {
+          "tag": "pr-case/rd-external-start-multi-week/commit-3",
+          "message": "test: record sparse recovery outcomes",
+          "committedAt": "2026-05-15T09:00:00.000Z",
           "knownEffortHours": 7
         }
       ]

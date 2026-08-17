@@ -108,6 +108,12 @@ an explicit 35-hour work week, and synthetic ground-truth effort. This allows a
 consumer to test commit acquisition, R&D classification, commit effort, the
 first-to-last commit activity window, and time apportionment as one flow.
 
+One multi-week scenario also carries a controlled external task-start record
+that predates its first commit. It supports a three-way comparison between the
+GitHub-only window, the externally extended window, and the same window bounded
+by known weekly activity hours. The start record changes eligible weeks but
+does not by itself prove the intensity of work in those weeks.
+
 GitHub records the real pull-request creation and merge timestamps. Those
 timestamps cannot be backdated, so historical activity windows must be derived
 from the controlled source-commit dates declared in `pr-scenarios.json`.
